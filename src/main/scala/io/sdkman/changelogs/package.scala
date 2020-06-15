@@ -130,10 +130,6 @@ package object changelogs {
     override def id = "zulufx"
   }
 
-  case object Oracle extends Vendor {
-    override def id = "oracle"
-  }
-
   trait Platform {
     def id: String
   }

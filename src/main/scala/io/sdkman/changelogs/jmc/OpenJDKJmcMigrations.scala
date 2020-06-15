@@ -1,11 +1,12 @@
-package io.sdkman.changelogs
+package io.sdkman.changelogs.jmc
 
 import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
+import io.sdkman.changelogs.{Linux64, MacOSX, Version, Windows, _}
 
 @ChangeLog(order = "029")
-class JmcMigrations {
-  
+class OpenJDKJmcMigrations {
+
   @ChangeSet(order = "001", id = "001_add_jmc_candidate", author = "den1ska")
   def migration001(implicit db: MongoDatabase) = {
     Candidate(
@@ -23,25 +24,27 @@ class JmcMigrations {
     List(
       Version(
         "jmc",
-        "7.0.1-oracle",
+        "7.0.1-open",
         "https://download.java.net/java/GA/jmc7.0.1/01/UPL/jmc-7.0.1+01_linux-x64_bin.tar.gz",
         Linux64,
-        Some(Oracle)
+        Some(OpenJDK)
       ),
       Version(
         "jmc",
-        "7.0.1-oracle",
+        "7.0.1-open",
         "https://download.java.net/java/GA/jmc7.0.1/01/UPL/jmc-7.0.1+01_osx-x64_bin.tar.gz",
-        Linux64,
-        Some(Oracle)
+        MacOSX,
+        Some(OpenJDK)
       ),
       Version(
         "jmc",
-        "7.0.1-oracle",
+        "7.0.1-open",
         "https://download.java.net/java/GA/jmc7.0.1/01/UPL/jmc-7.0.1+01_windows-x64_bin.zip",
-        Linux64,
-        Some(Oracle)
-      ),
+        Windows,
+        Some(OpenJDK)
+      )
     ).insert()
-      .asCandidateDefault()
+
+    setCandidateDefault("jmc", "7.0.1-open")
   }
+}
